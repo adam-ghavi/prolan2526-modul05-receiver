@@ -90,3 +90,8 @@ This is the place for you to write reflections:
 2. Rust does not allow direct mutation of static variables because its ownership model enforces strict compile-time guarantees about memory and thread safety. Unlike Java, where static variables can be mutated freely, Rust requires explicit synchronization for any shared mutable state across threads.
 
 #### Reflection Subscriber-2
+1. I explored several parts of the code beyond the explicit tutorial steps, particularly in src/lib.rs and the module organization. I examined how the application uses Rocket's launch() function and how routes are mounted through the route_stage() functions across different modules. I also looked at the configuration management in bambangshop_receiver to understand how APP_CONFIG provides instance names and URLs for the distributed notification system.
+
+2. The Observer pattern makes adding more subscribers extremely easy because subscribers are decoupled from the publisher through the Subscriber model and repository. To add a new subscriber, you simply register its URL and name via the API endpoint, and the NotificationService::notify() method automatically broadcasts to all registered subscribers concurrently using threads. This plug-and-play nature means the publisher doesn't need to know anything about subscribers beyond their webhook endpoints.
+
+3. I created additional tests beyond the basic tutorial to verify concurrent notification delivery and error handling. Writing tests in Rust using #[cfg(test)] modules proved extremely useful for catching issues like data races and ensuring the RwLock and DashMap operations were thread-safe.

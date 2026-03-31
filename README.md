@@ -85,5 +85,8 @@ This is the place for you to write reflections:
 ### Mandatory (Subscriber) Reflections
 
 #### Reflection Subscriber-1
+1. RwLock is the appropriate choice for BambangShop's notification vector because the workload is read-heavy, notifications are frequently viewed for history and auditing but only appended when products are published. Unlike Mutex, which would serialize all operations and block readers during writes, RwLock allows multiple concurrent readers.
+
+2. Rust does not allow direct mutation of static variables because its ownership model enforces strict compile-time guarantees about memory and thread safety. Unlike Java, where static variables can be mutated freely, Rust requires explicit synchronization for any shared mutable state across threads.
 
 #### Reflection Subscriber-2

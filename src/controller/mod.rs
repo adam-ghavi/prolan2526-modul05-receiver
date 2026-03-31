@@ -6,3 +6,5 @@ pub fn route_stage() -> AdHoc {
             .mount("/", routes![])
     });
 }
+
+pub mod notification;
